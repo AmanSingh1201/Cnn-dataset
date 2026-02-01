@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Assamese Alphabet Dataset Creator</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #f4f6f8;
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
+
+        .container {
+            background: #ffffff;
+            padding: 25px 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+            width: 360px;
+        }
+
+        h2 {
+            margin-bottom: 6px;
+            color: #333;
+        }
+
+        p {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 14px;
+        }
+
+        canvas {
+            border: 2px solid #222;
+            border-radius: 8px;
+            background: white;
+            cursor: crosshair;
+        }
+
+        .controls {
+            margin-top: 15px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 12px;
+            font-size: 15px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #007bff;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            font-size: 15px;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            margin-bottom: 8px;
+            transition: background 0.2s;
+        }
+
+        .save-btn {
+            background: #007bff;
+            color: white;
+        }
+
+        .save-btn:hover {
+            background: #0056b3;
+        }
+
+        .clear-btn {
+            background: #e0e0e0;
+            color: #333;
+        }
+
+        .clear-btn:hover {
+            background: #cfcfcf;
+        }
+
+        .hint {
+            font-size: 12px;
+            color: #888;
+            margin-top: 8px;
+        }
+
+        .credit {
+            margin-top: 14px;
+            font-size: 12px;
+            color: #666;
+            text-align: center;
+            line-height: 1.4;
+        }
+
+        .credit strong {
+            color: #333;
+        }
+
+        .credit span {
+            display: block;
+            font-size: 13px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>Assamese Alphabet Writer</h2>
+    <p>Draw one letter at a time and save as PNG</p>
+
+    <canvas id="drawCanvas" width="280" height="280"></canvas>
+
+    <div class="controls">
+        <input type="text" id="label" placeholder="Enter label (ka, kha, ga...)">
+        <button class="save-btn" onclick="saveImage()">Save PNG</button>
+        <button class="clear-btn" onclick="clearCanvas()">Clear Canvas</button>
+    </div>
+
+    <div class="hint">
+        Tip: Draw slowly for cleaner CNN samples
+    </div>
+
+    <!-- CREDIT SECTION -->
+    <div class="credit">
+        <span>
+            Made by <strong>Aman</strong> for my Assamese friend <strong>Anurag</strong> ❤️
+        </span>
+        <span>
+            আমনৰ দ্বাৰা নিৰ্মিত — মোৰ অসমীয়া বন্ধু <strong>অনুৰাগ</strong>ৰ বাবে ❤️
+        </span>
+    </div>
+</div>
+
+<script>
+    const canvas = document.getElementById("drawCanvas");
+    const ctx = canvas.getContext("2d");
+
+    // Initialize background
+    ctx.fillStyle = "white";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    ctx.strokeStyle = "black";
+    ctx.lineWidth = 10;
+    ctx.lineCap = "round";
+
+    let drawing = false;
+    let count = 1;
+
+    canvas.addEventListener("mousedown", () => drawing = true);
+    canvas.addEventListener("mouseup", () => {
+        drawing = false;
+        ctx.beginPath();
+    });
+    canvas.addEventListener("mouseleave", () => {
+        drawing = false;
+        ctx.beginPath();
+    });
+
+    canvas.addEventListener("mousemove", draw);
+
+    function draw(e) {
+        if (!drawing) return;
+        ctx.lineTo(e.offsetX, e.offsetY);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(e.offsetX, e.offsetY);
+    }
+
+    function clearCanvas() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = "white";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.beginPath();
+    }
+
+    function saveImage() {
+        const label = document.getElementById("label").value.trim();
+        if (label === "") {
+            alert("Please enter an alphabet label!");
+            return;
+        }
+
+        const link = document.createElement("a");
+        link.download = `${label}_${count}.png`;
+        link.href = canvas.toDataURL("image/png");
+        link.click();
+
+        count++;
+        clearCanvas();
+    }
+</script>
+
+</body>
+</html>
