@@ -1,0 +1,73 @@
+ASSAMESE ALPHABET DATASET CREATOR
+--------------------------------
+
+Website Purpose:
+This website is used to create a handwritten Assamese alphabet dataset
+in PNG format for training CNN / Deep Learning models.
+
+
+HOW TO USE THE WEBSITE
+----------------------
+
+1. Open the website link in any modern browser
+   (Chrome / Edge / Firefox recommended).
+
+2. You will see a white drawing canvas in the center.
+
+3. In the input box, type the label name of the alphabet.
+   Example:
+     ka
+     kha
+     ga
+
+4. Use your mouse, trackpad, or stylus to draw ONE Assamese alphabet
+   clearly inside the canvas.
+
+5. Click the "Save PNG" button.
+   - The image will automatically download as:
+       label_1.png, label_2.png, label_3.png, ...
+
+6. After saving, the canvas will clear automatically.
+   Draw the same alphabet again to create more samples.
+
+7. Repeat steps 4–6 around 50–100 times for each alphabet
+   to build a good dataset.
+
+8. Change the label name when you move to the next alphabet.
+
+
+IMPORTANT NOTES
+---------------
+
+• Images are downloaded to your system's default Downloads folder.
+• GitHub Pages cannot save files directly to the server.
+• Keep the canvas size and drawing style consistent.
+• Draw slowly and clearly for better CNN performance.
+
+
+RECOMMENDED DATASET STRUCTURE
+-----------------------------
+
+After downloading images, organize them like this:
+
+dataset/
+ ├── ka/
+ │    ├── ka_1.png
+ │    ├── ka_2.png
+ │    └── ...
+ ├── kha/
+ ├── ga/
+ └── ...
+
+
+CREDITS
+-------
+
+Made by Aman  
+For Assamese friend Anurag ❤️
+
+English:
+Made by Aman for my Assamese friend Anurag.
+
+Assamese:
+আমনৰ দ্বাৰা নিৰ্মিত — মোৰ অসমীয়া বন্ধু অনুৰাগৰ বাবে ❤️
